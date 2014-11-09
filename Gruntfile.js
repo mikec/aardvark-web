@@ -52,6 +52,7 @@ module.exports = function(grunt) {
                 options: {
                     browser: true,
                     globals: {
+                        console: false,
                         angular: false,
                         aardvarkweb: true
                     },
@@ -209,7 +210,7 @@ module.exports = function(grunt) {
         'jshint',
         'build-dist',
         'express',
-        'karma',
+        //'karma',
         'watch'
     ]);
 

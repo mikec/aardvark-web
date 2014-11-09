@@ -1,6 +1,8 @@
 /**
  * App controller.
  */
-aardvarkweb.AppCtrl = function() { };
+aardvarkweb.AppCtrl = ['API', function(API) {
+    API.doSomething();
+}];
 
 aardvarkweb.controller('AppCtrl', aardvarkweb.AppCtrl);
