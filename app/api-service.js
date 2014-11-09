@@ -19,6 +19,9 @@ aardvarkweb.API = function() {
                         .then(function(resp) {
                             var usr = resp.data.twitter_user;
 
+                            usr.image_url = usr.image_url
+                                                .replace('_normal', '_400x400');
+
                             usr.artistKeys = usr.songs.map(function(s) {
                                 var segs = s.rdio_id.split(':');
                                 return segs[segs.length - 1];

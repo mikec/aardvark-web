@@ -41,32 +41,37 @@ aardvarkweb.Rdio = ['$rootScope', '$q', function($rootScope, $q) {
     Rdio.prototype.getArtists = function(artistKeys) {
         return execWhenReady(function() {
             return get(
-                artistKeys,
-                JSON.stringify([
+                artistKeys
+                ,JSON.stringify([
                     {"field": "*", "exclude": true},
                     {"field": "name"},
                     {"field": "key"},
+                    {"field": "type"},
                     {"field": "topSongsKey"}
                 ])
             );
         });
     };
 
-    Rdio.prototype.getTopSongs = function(songKeys) {
+    Rdio.prototype.getTopSongStations = function(stationKeys) {
+        stationKeys = stationKeys.splice(0, 3);
         return execWhenReady(function() {
             return get(
-                songKeys
+                stationKeys
                 , JSON.stringify([
                     {"field": "*", "exclude": true},
                     {"field": "artistName"},
                     {
                         "field": "tracks",
-                        //"count": 3, // NOT WORKING??
+                        /*"start": 0,
+                        "count": 1,
+                        "sort": "playCount",*/
                         "extras": [
                             {"field": "*", "exclude": true},
                             {"field": "name"},
                             {"field": "artist"},
                             {"field": "key"},
+                            {"field": "playCount"},
                             {"field": "icon400"}
                         ]
                     }
@@ -139,9 +144,11 @@ aardvarkweb.Rdio = ['$rootScope', '$q', function($rootScope, $q) {
             content: content,
             success: function(resp) {
                 def.resolve(resp);
+                $rootScope.$apply();
             },
             error: function(err) {
                 def.reject(err);
+                $rootScope.$apply();
             }
         });
 
