@@ -39,7 +39,7 @@ aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
                     for(var i in stations) {
                         var t = stations[i];
                         if(t.tracks && t.tracks.length > 0) {
-                            $this.songs.push(t.tracks[0]);
+                            $this.songs.unshift(getMostPopularTrack(t.tracks));
                         }
                     }
                     loadNextQueuedStation();
@@ -53,6 +53,19 @@ aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
         var tot = stationKeys.length;
         var done = tot - stationLoadingQueue.length;
         $this.percentLoaded = Math.round((done / tot)*100);
+    }
+
+    function getMostPopularTrack(tracks) {
+        var highestCount = 0;
+        var bestTrack = null;
+        for(var i in tracks) {
+            var t = tracks[i];
+            if(!t.playCount) t.playCount = 0;
+            if(t.playCount >= highestCount) {
+                bestTrack = t;
+            }
+        }
+        return bestTrack;
     }
 
     return new PlaylistMaker();

@@ -3,20 +3,32 @@
   <div ng-if="ctrl.loading">loading data for <b>@{{ctrl.handle}}</b>...</div>
 
   <div ng-if="!ctrl.loading">
-    <img ng-src="{{ctrl.twitterUser.image_url}}" style="width:300px;" />
-    <div><b>{{ctrl.twitterUser.name}}</b></div>
-    <div>
-      <a ng-href="{{'http://twitter.com/' + ctrl.twitterUser.handle}}">@{{ctrl.twitterUser.handle}}</a>
+
+    <div class="left-col">
+      <div class="username"><b>{{ctrl.twitterUser.name}}</b></div>
+      <div>
+        <a ng-href="{{'http://twitter.com/' + ctrl.twitterUser.handle}}">@{{ctrl.twitterUser.handle}}</a>
+      </div>
+      <br />
+      <img ng-src="{{ctrl.twitterUser.image_url}}" style="width:300px;" />
     </div>
 
-    <br />
-    <div ng-if="ctrl.PlaylistMaker.loading">LOADING SONGS <b>{{ctrl.PlaylistMaker.percentLoaded}}%</b></div>
+    <div class="right-col">
 
-    <br />
-    <div class="playlist">
-      <div ng-repeat="s in ctrl.PlaylistMaker.songs" class="list-item">
-        <b>{{s.name}}</b> by <b>{{s.artist}}</b> <a ng-click="ctrl.Rdio.play(s.key)">PLAY</a>
+      <br />
+      <div ng-if="ctrl.PlaylistMaker.loading" class="song-loading">Loaded <b>{{ctrl.PlaylistMaker.percentLoaded}}%</b></div>
+
+      <br />
+      <div class="playlist">
+        <div ng-repeat="s in ctrl.PlaylistMaker.songs" ng-click="ctrl.Rdio.play(s.key)" class="list-item">
+          <img ng-src="{{s.icon400}}" />
+          <div class="info">
+            <div class="title">{{s.name}}</div>
+            <div class="artist">{{s.artist}}</div>
+          </div>
+        </div>
       </div>
+
     </div>
 
   </div>
