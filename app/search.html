@@ -4,8 +4,8 @@
     <h2>Search ::::::::::::::::::::::::::::::::::::::::</h2>
 
     <div class="search-bar">
-      <input type="text" />
-      <button type="submit">get gangsta</button>
+      <input type="text" ng-model="searchText" ng-enter="ctrl.search()" />
+      <button type="submit" ng-click="ctrl.search()">find twitter user</button>
     </div>
   </div>
 
