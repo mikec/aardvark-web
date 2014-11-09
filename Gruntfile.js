@@ -215,6 +215,11 @@ module.exports = function(grunt) {
         'watch'
     ]);
 
+    grunt.registerTask('build', [
+        'jshint',
+        'build-dist'
+    ]);
+
     function setEnvVars() {
         if(minOption()) {
             process.env.MINIFY = 'yes';
