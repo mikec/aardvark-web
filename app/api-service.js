@@ -17,7 +17,14 @@ aardvarkweb.API = function() {
         function railsGet(url) {
             return $http.get(apiRoot + url)
                         .then(function(resp) {
-                            return resp.data.twitter_user;
+                            var usr = resp.data.twitter_user;
+
+                            usr.artistKeys = usr.songs.map(function(s) {
+                                var segs = s.rdio_id.split(':');
+                                return segs[segs.length - 1];
+                            });
+
+                            return usr;
                         });
         }
 

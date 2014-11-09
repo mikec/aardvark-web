@@ -1,8 +1,9 @@
-aardvarkweb.PlaylistCtrl = ['$routeParams', 'API', 'PlaylistMaker',
-function($routeParams, API, PlaylistMaker) {
+aardvarkweb.PlaylistCtrl = ['$routeParams', 'API', 'PlaylistMaker', 'Rdio',
+function($routeParams, API, PlaylistMaker, Rdio) {
 
     var $this = this;
     this.handle = $routeParams.handle;
+    this.Rdio = Rdio;
     this.twitterUser = null;
     this.loading = true;
     this.playlist = [];
@@ -12,9 +13,8 @@ function($routeParams, API, PlaylistMaker) {
             $this.loading = false;
             $this.twitterUser = twitterUser;
 
-            PlaylistMaker.getPlaylist(['r48259', 'r2291142'])
+            PlaylistMaker.getPlaylist(twitterUser.artistKeys)
                 .then(function(playlist) {
-                    console.log(playlist);
                     $this.playlist = playlist;
                 });
         });

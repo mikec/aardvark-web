@@ -1,6 +1,5 @@
-aardvarkweb.Rdio = ['$rootScope', function($rootScope) {
+aardvarkweb.Rdio = ['$rootScope', '$q', function($rootScope, $q) {
 
-    var whenReadyFns = [];
     var $this;
 
     function Rdio() {
@@ -12,32 +11,94 @@ aardvarkweb.Rdio = ['$rootScope', function($rootScope) {
         R.ready(function() {
             $this.ready = true;
             updateAuthStatus();
-            execWhenReadyFns();
+            $rootScope.$broadcast('Rdio:ready');
             $rootScope.$apply();
         });
     }
 
     Rdio.prototype.ready = function(fn) {
-        execWhenReady(fn);
+        return execWhenReady(fn);
     };
 
     Rdio.prototype.authenticate = function() {
-        execWhenReady(authenticate);
+        return execWhenReady(function() {
+            authenticate();
+        });
+    };
+
+    Rdio.prototype.play = function(trackKey) {
+        return execWhenReady(function() {
+            R.player.play({ source: trackKey });
+        });
+    };
+
+    Rdio.prototype.get = function(keys) {
+        return execWhenReady(function() {
+            return get(keys);
+        });
+    };
+
+    Rdio.prototype.getArtists = function(artistKeys) {
+        return execWhenReady(function() {
+            return get(
+                artistKeys,
+                JSON.stringify([
+                    {"field": "*", "exclude": true},
+                    {"field": "name"},
+                    {"field": "key"},
+                    {"field": "topSongsKey"}
+                ])
+            );
+        });
+    };
+
+    Rdio.prototype.getTopSongs = function(songKeys) {
+        return execWhenReady(function() {
+            return get(
+                songKeys
+                , JSON.stringify([
+                    {"field": "*", "exclude": true},
+                    {"field": "artistName"},
+                    {
+                        "field": "tracks",
+                        //"count": 3, // NOT WORKING??
+                        "extras": [
+                            {"field": "*", "exclude": true},
+                            {"field": "name"},
+                            {"field": "artist"},
+                            {"field": "key"},
+                            {"field": "icon400"}
+                        ]
+                    }
+                ])
+            );
+        });
     };
 
     function execWhenReady(fn) {
+        var def = $q.defer();
         if($this.ready) {
-            fn();
+            execFn();
         } else {
-            whenReadyFns.push(fn);
+            $rootScope.$on('Rdio:ready', function() {
+                execFn();
+            });
         }
-    }
 
-    function execWhenReadyFns() {
-        for(var i in whenReadyFns) {
-            whenReadyFns[i]();
+        function execFn() {
+            var promise = fn();
+            if(promise) {
+                promise.then(function(result) {
+                    def.resolve(result);
+                }, function(err) {
+                    def.reject(err);
+                });
+            } else {
+                def.resolve();
+            }
         }
-        whenReadyFns = [];
+
+        return def.promise;
     }
 
     function authenticate() {
@@ -48,6 +109,44 @@ aardvarkweb.Rdio = ['$rootScope', function($rootScope) {
                 $rootScope.$apply();
             }
         });
+    }
+
+    function get(keys, extras) {
+
+        var reqContent = {
+            keys: keys.join(',')
+        };
+
+        if(extras) {
+            reqContent.extras = extras;
+        }
+
+        return request(reqContent).then(function(resp) {
+            var items = [];
+            for(var i in resp.result) {
+                items.push(resp.result[i]);
+            }
+            return items;
+        });
+    }
+
+    function request(content) {
+
+        var def = $q.defer();
+
+        R.request({
+            method: 'get',
+            content: content,
+            success: function(resp) {
+                def.resolve(resp);
+            },
+            error: function(err) {
+                def.reject(err);
+            }
+        });
+
+        return def.promise;
+
     }
 
     function updateAuthStatus() {
