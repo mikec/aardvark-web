@@ -1,29 +1,26 @@
-aardvarkweb.PlaylistMaker = ['$rootScope', '$q', function($rootScope, $q) {
+aardvarkweb.PlaylistMaker = ['$rootScope', '$q', 'Rdio', function($rootScope, $q, Rdio) {
 
     function PlaylistMaker() {}
 
-    PlaylistMaker.prototype.getPlaylist = function(artistIds) {
+    PlaylistMaker.prototype.getPlaylist = function(artistKeys) {
 
-        var def = $q.defer();
-
-        R.request({
-            method: 'get',
-            content: {
-                keys: artistIds.join(',')
-            },
-            success: function(resp) {
-                var songs = [];
-                for(var i in resp.result) {
-                    songs.push(resp.result[i]);
-                }
-                def.resolve(songs);
-            },
-            error: function(err) {
-                def.reject(err);
-            }
-        });
-
-        return def.promise;
+        return Rdio.getArtists(artistKeys)
+                .then(function(artists) {
+                    var songKeys = artists.map(function(a) {
+                        return a.topSongsKey;
+                    });
+                    return Rdio.getTopSongs(songKeys);
+                })
+                .then(function(topSongs) {
+                    var songs = [];
+                    for(var i in topSongs) {
+                        var t = topSongs[i];
+                        if(t.tracks && t.tracks.length > 0) {
+                            songs.push(t.tracks[0]);
+                        }
+                    }
+                    return songs;
+                });
 
     };
 

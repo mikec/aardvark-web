@@ -9,8 +9,8 @@
       <a ng-href="{{'http://twitter.com/' + ctrl.twitterUser.handle}}">@{{ctrl.twitterUser.handle}}</a>
     </div>
 
-    <div ng-repeat="artist in ctrl.twitterUser.songs">
-      {{artist.rdio_id}}
+    <div ng-repeat="track in ctrl.playlist">
+      <b>{{track.name}}</b> by <b>{{track.artist}}</b> <a ng-click="ctrl.Rdio.play(track.key)">PLAY</a>
     </div>
 
   </div>
