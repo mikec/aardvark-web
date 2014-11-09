@@ -1,28 +1,59 @@
-aardvarkweb.PlaylistMaker = ['$rootScope', '$q', 'Rdio', function($rootScope, $q, Rdio) {
+aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
 
-    function PlaylistMaker() {}
+    var $this;
+    var stationLoadingQueue = [];
+    var stationKeys = [];
+
+    function PlaylistMaker() {
+        $this = this;
+        this.loading = false;
+        this.percentLoaded = 0;
+        this.songs = [];
+    }
 
     PlaylistMaker.prototype.getPlaylist = function(artistKeys) {
 
-        return Rdio.getArtists(artistKeys)
+        this.songs = [];
+        this.loading = true;
+        this.percentLoaded = 0;
+        stationLoadingQueue = [];
+        stationKeys = [];
+
+        Rdio.getArtists(artistKeys)
                 .then(function(artists) {
-                    var songKeys = artists.map(function(a) {
+                    stationKeys = artists.map(function(a) {
                         return a.topSongsKey;
                     });
-                    return Rdio.getTopSongs(songKeys);
-                })
-                .then(function(topSongs) {
-                    var songs = [];
-                    for(var i in topSongs) {
-                        var t = topSongs[i];
-                        if(t.tracks && t.tracks.length > 0) {
-                            songs.push(t.tracks[0]);
-                        }
-                    }
-                    return songs;
+                    stationLoadingQueue.push.apply(stationLoadingQueue, stationKeys);
+                    loadNextQueuedStation();
                 });
 
     };
+
+    function loadNextQueuedStation() {
+        if(stationLoadingQueue.length > 0) {
+            updatePercentLoaded();
+            var stationKey = stationLoadingQueue.shift();
+            Rdio.getTopSongStations([stationKey])
+                .then(function(stations) {
+                    for(var i in stations) {
+                        var t = stations[i];
+                        if(t.tracks && t.tracks.length > 0) {
+                            $this.songs.push(t.tracks[0]);
+                        }
+                    }
+                    loadNextQueuedStation();
+                });
+        } else {
+            $this.loading = false;
+        }
+    }
+
+    function updatePercentLoaded() {
+        var tot = stationKeys.length;
+        var done = tot - stationLoadingQueue.length;
+        $this.percentLoaded = Math.round((done / tot)*100);
+    }
 
     return new PlaylistMaker();
 
