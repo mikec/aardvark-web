@@ -3,6 +3,19 @@
       <span>aardvarkk</span>
       <img src="http://www.supercoloring.com/wp-content/main/2009_01/anteater-16-coloring-page.jpg" />
     </div>
+    <div class="welcome">
+
+    <div ng-if="!ctrl.Rdio.ready">LOADING...</div>
+
+    <div ng-if="ctrl.Rdio.ready">
+      <a ng-if="!ctrl.Rdio.authenticated" ng-click="ctrl.rdioAuth()">Sign in to Rdio</a>
+
+      <div ng-if="ctrl.Rdio.authenticated">
+        Welcome {{ctrl.Rdio.userName}}!
+      </div>
+    </div>
+</div>
+
 </header>
 <div class="header-fill">
 </div>

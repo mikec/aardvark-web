@@ -1,6 +1,9 @@
 @black: #0F0F0F;
 @blue: #009EEF;
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0 10px;
@@ -17,17 +20,41 @@ header {
   background-color: #FFF;
 }
 
+footer {
+}
+
 .header-fill {
   height: 50px
 }
 
+.search-bar {
+  display: table;
+  float: right;
+}
+
 .search-bar input {
+  display: table-cell;
+  height: 50px;
+  width: 324px;
+  padding: 0 20px;
   border: 1px solid @black;
   background: 0;
+  font-size: 1.4em;
+  vertical-align: top;
+}
+
+.search-bar button {
+  display: table-cell;
   height: 50px;
+  width: 100px;
+  line-height: 50px;
+  background: 0;
+  border: 1px solid @black;
 }
 
 .welcome {
+  display: inline-block;
+  float: right;
   padding: 20px;
   text-align: center;
 }
@@ -38,6 +65,9 @@ a {
   text-decoration: underline;
 }
 
+h2 {
+  display: inline-block;
+}
 .general-inner {
   width: 90%;
   max-width: 1024px;
@@ -50,10 +80,21 @@ a {
   line-height: 50px;
   margin-left: 20px;
   overflow: hidden;
+  color: @blue;
 }
 
 .logo img {
   height: 100%;
 }
 
+
+.index-header {
+  padding: 20px 0;
+  vertical-align: top;
+}
+
+.index-header h2 {
+  margin: 0;
+  line-height: 50px;
+}
 @import 'style/recommend';
