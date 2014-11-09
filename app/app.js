@@ -9,7 +9,9 @@ function(APIProvider, $httpProvider, $routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
     $routeProvider.when('/', {
-        templateUrl: 'search.html'
+        templateUrl: 'search.html',
+        controller: 'SearchCtrl',
+        controllerAs: 'ctrl'
     });
 
     $routeProvider.when('/:handle', {
