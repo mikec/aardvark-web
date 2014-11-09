@@ -1,6 +1,50 @@
-<div>
-  AAAAAAAAAAAArdvark
+<div ng-if="ctrl.authed">
+  Welcome {{ctrl.rdioUserName}}!
 
-  <a ng-click="ctrl.playbackTest()">get gangsta</a>
+  <div>{{ctrl.artist}}</div>
+  <div ng-if="ctrl.station">
+    yo
+    {{ctrl.station}}
+  </div>
+</div>
+
+<div>
+
+  <div class="search-bar">
+    <input type="text" />
+    <button type="submit">get gangsta</button>
+  </div>
+
+  <div class="recommend">
+    <h2>Check out whose popular right now</h2>
+    <div class="recommend-user">
+      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
+      <div class="recommend-user-name">
+        <div class="screen-name">Vince Staples</div>
+        <div class="handle">@vincestaples</div>
+      </div>
+    </div>
+    <div class="recommend-user">
+      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
+      <div class="recommend-user-name">
+        <div class="screen-name">Vince Staples</div>
+        <div class="handle">@vincestaples</div>
+      </div>
+    </div>
+    <div class="recommend-user">
+      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
+      <div class="recommend-user-name">
+        <div class="screen-name">Vince Staples</div>
+        <div class="handle">@vincestaples</div>
+      </div>
+    </div>
+    <div class="recommend-user">
+      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
+      <div class="recommend-user-name">
+        <div class="screen-name">Vince Staples</div>
+        <div class="handle">@vincestaples</div>
+      </div>
+    </div>
+  </div>
 
 </div>

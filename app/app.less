@@ -1,15 +1,59 @@
+@black: #0F0F0F;
+@blue: #009EEF;
+
 body {
-    font-family: arial, sans-serif;
-    color: rgb(110, 110, 110);
+  margin: 0;
+  padding: 0 10px;
+  font-family: arial, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  box-shadow: 1px 0 2px #999;
+  background-color: #FFF;
+}
+
+.header-fill {
+  height: 50px
+}
+
+.search-bar input {
+  border: 1px solid @black;
+  background: 0;
+  height: 50px;
 }
 
 .welcome {
-    padding: 20px;
-    text-align: center;
+  padding: 20px;
+  text-align: center;
 }
 
 a {
-    cursor: pointer;
-    color: rgb(0, 158, 255);
-    text-decoration: underline;
+  cursor: pointer;
+  color: rgb(0, 158, 255);
+  text-decoration: underline;
 }
+
+.general-inner {
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+.logo img {
+  height: 100%;
+}
+
+@import 'style/recommend';
