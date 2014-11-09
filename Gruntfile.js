@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                     browser: true,
                     globals: {
                         angular: false,
-                        aardvarkWeb: true
+                        aardvarkweb: true
                     },
                     laxcomma: true,
                     maxlen: 120,

@@ -1,6 +1,6 @@
 /**
  * App controller.
  */
-aardvarkWeb.AppCtrl = function() { };
+aardvarkweb.AppCtrl = function() { };
 
-aardvarkWeb.controller('AppCtrl', aardvarkWeb.AppCtrl);
+aardvarkweb.controller('AppCtrl', aardvarkweb.AppCtrl);

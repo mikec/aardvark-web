@@ -1,5 +1,5 @@
 {
-    "name": "aardvarkWeb",
+    "name": "aardvarkweb",
     "version": "0.1.0",
     "main": "server/main.js",
     "devDependencies": {

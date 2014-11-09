@@ -1,3 +1,3 @@
-aardvarkWeb.config(function() { });
+aardvarkweb.config(function() { });
 
-aardvarkWeb.run(function() { });
+aardvarkweb.run(function() { });

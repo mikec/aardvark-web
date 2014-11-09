@@ -3,7 +3,7 @@ describe('AppCtrl', function() {
     var ctrl;
 
     beforeEach(function() {
-        module('aardvarkWeb');
+        module('aardvarkweb');
         inject(function($controller) {
             ctrl = $controller('AppCtrl');
         });
