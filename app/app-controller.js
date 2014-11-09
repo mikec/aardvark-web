@@ -1,35 +1,13 @@
 /**
  * App controller.
  */
-aardvarkweb.AppCtrl = ['$scope', function($scope) {
+aardvarkweb.AppCtrl = ['$scope', 'Rdio', function($scope, Rdio) {
 
-    var $this = this;
-
-    this.song = null;
-    this.rdioReady = false;
-    this.authed = false;
-    this.rdioUserName = null;
+    this.Rdio = Rdio;
 
     this.rdioAuth = function() {
-        R.authenticate(function(nowAuthenticated) {
-            $scope.$apply(function() {
-                $this.rdioUserName = getUsername();
-            });
-        });
+        Rdio.authenticate();
     };
-
-    R.ready(function() {
-        $this.rdioReady = true;
-        $this.authed = R.authenticated();
-        if ($this.authed) {
-            $this.rdioUserName = getUsername();
-        }
-        $scope.$apply();
-    });
-
-    function getUsername() {
-        return R.currentUser.get('firstName') + ' ' + R.currentUser.get('lastName');
-    }
 
 }];
 

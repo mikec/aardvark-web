@@ -1,12 +1,12 @@
 <div class="welcome">
 
-  <div ng-if="!ctrl.rdioReady">LOADING...</div>
+  <div ng-if="!ctrl.Rdio.ready">LOADING...</div>
 
-  <div ng-if="ctrl.rdioReady">
-    <a ng-if="!ctrl.authed" ng-click="ctrl.rdioAuth()">Sign in to Rdio</a>
+  <div ng-if="ctrl.Rdio.ready">
+    <a ng-if="!ctrl.Rdio.authenticated" ng-click="ctrl.rdioAuth()">Sign in to Rdio</a>
 
-    <div ng-if="ctrl.authed">
-      Welcome {{ctrl.rdioUserName}}!
+    <div ng-if="ctrl.Rdio.authenticated">
+      Welcome {{ctrl.Rdio.userName}}!
     </div>
   </div>
 
