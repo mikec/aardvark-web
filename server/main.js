@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 app.use('/', express.static(path.join(rootPath, 'app')));
 
 app.get('/', function(req, res) {
-    renderIndex(req.config, res);
+    renderView(req.config, res, 'index');
 });
 
 app.use(function(req, res) {
@@ -48,8 +48,8 @@ app.listen(port, function() {
     console.log('Server listening on port ' + port);
 });
 
-function renderIndex(config, res) {
-    res.render(getMinPrefix(config) + '/views/index');
+function renderView(config, res, view) {
+    res.render(getMinPrefix(config) + '/views/' + view);
 }
 
 function configFromReq(req) {

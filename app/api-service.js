@@ -1,13 +1,30 @@
 aardvarkweb.API = function() {
 
-    function API() {}
+    var apiRoot;
 
-    API.prototype.doSomething = function() {
-        //
+    this.setApiRoot = function(_apiRoot) {
+        apiRoot = _apiRoot;
     };
 
-    return new API();
+    this.$get = ['$http', function($http) {
+
+        function API() {}
+
+        API.prototype.getArtists = function() {
+            return railsGet('/songs/1');
+        };
+
+        function railsGet(url) {
+            return $http.get(apiRoot + url)
+                        .then(function(resp) {
+                            return resp.data;
+                        });
+        }
+
+        return new API();
+
+    }];
 
 };
 
-aardvarkweb.factory('API', aardvarkweb.API);
+aardvarkweb.provider('API', aardvarkweb.API);

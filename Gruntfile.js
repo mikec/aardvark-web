@@ -53,6 +53,7 @@ module.exports = function(grunt) {
                     browser: true,
                     globals: {
                         console: false,
+                        R: false,
                         angular: false,
                         aardvarkweb: true
                     },
