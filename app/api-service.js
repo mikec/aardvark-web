@@ -11,7 +11,7 @@ aardvarkweb.API = function() {
         function API() {}
 
         API.prototype.getTwitterUser = function(twitterHandle) {
-            return railsGet('/twitter_users/' + twitterHandle);
+            return railsGet('/' + twitterHandle);
         };
 
         function railsGet(url) {
