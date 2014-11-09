@@ -38,11 +38,11 @@ app.use(function(req, res, next) {
 app.use('/', express.static(path.join(rootPath, 'app')));
 
 app.get('/:anything', function(req, res) {
-    renderView(req.config, res, 'index');
+    renderIndex(req.config, res);
 });
 
 app.get('/', function(req, res) {
-    renderView(req.config, res, 'index');
+    renderIndex(req.config, res);
 });
 
 app.use(function(req, res) {
@@ -53,8 +53,14 @@ app.listen(port, function() {
     console.log('Server listening on port ' + port);
 });
 
-function renderView(config, res, view) {
-    res.render(getMinPrefix(config) + '/views/' + view);
+function renderIndex(config, res) {
+    renderView(config, res, 'index', {
+        aardvarkServerUrl: process.env.AARDVARK_SERVER_URL
+    });
+}
+
+function renderView(config, res, view, data) {
+    res.render(getMinPrefix(config) + '/views/' + view, data);
 }
 
 function configFromReq(req) {

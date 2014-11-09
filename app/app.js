@@ -7,7 +7,7 @@ aardvarkweb.config(
     $httpProvider.defaults.headers.common['Content-Type'] =
            'application/json';
 
-    APIProvider.setApiRoot('http://localhost:3000');
+    APIProvider.setApiRoot(window.CONFIG.aardvarkServerUrl);
 
     PlaylistMakerProvider.setSongLimit(15);
 
