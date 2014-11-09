@@ -20,8 +20,10 @@
 
       <br />
       <div class="playlist">
-        <div ng-repeat="s in ctrl.PlaylistMaker.songs" ng-click="ctrl.Rdio.play(s.key)" class="list-item">
+        <div ng-repeat="s in ctrl.PlaylistMaker.songs" ng-click="ctrl.playTrack(s.key)" class="list-item" ng-class="{'active':s.key == ctrl.playingTrackKey, 'playing':ctrl.playState == 'playing', 'paused':ctrl.playState == 'paused'}">
           <img ng-src="{{s.icon400}}" />
+          <div class="play-btn"><i class="fa fa-play"></i></div>
+          <div class="pause-btn"><i class="fa fa-pause"></i></div>
           <div class="info">
             <div class="title">{{s.name}}</div>
             <div class="artist">{{s.artist}}</div>

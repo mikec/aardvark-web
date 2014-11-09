@@ -12,6 +12,14 @@ aardvarkweb.Rdio = ['$rootScope', '$q', function($rootScope, $q) {
             $this.ready = true;
             updateAuthStatus();
             $rootScope.$broadcast('Rdio:ready');
+            R.player.on("change:playingTrack", function(t) {
+                $rootScope.$broadcast('Rdio:change:playingTrack', t);
+                $rootScope.$apply();
+            });
+            R.player.on("change:playState", function(state) {
+                $rootScope.$broadcast('Rdio:change:playState', state);
+                $rootScope.$apply();
+            });
             $rootScope.$apply();
         });
     }
@@ -29,6 +37,12 @@ aardvarkweb.Rdio = ['$rootScope', '$q', function($rootScope, $q) {
     Rdio.prototype.play = function(trackKey) {
         return execWhenReady(function() {
             R.player.play({ source: trackKey });
+        });
+    };
+
+    Rdio.prototype.togglePause = function() {
+        return execWhenReady(function() {
+            R.player.togglePause();
         });
     };
 

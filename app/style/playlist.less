@@ -1,7 +1,7 @@
 .playlist {
     margin-top: 25px;
     .list-item {
-        padding: 10px 0;
+        margin: 10px 0;
         cursor: pointer;
         img {
             position: absolute;
@@ -10,12 +10,55 @@
         }
         .info {
             margin-left: 160px;
-            min-height: 135px;
+            padding: 10px 0;
+            min-height: 115px;
             .title {
+                color: @gray-4;
                 font-size: @size-8;
             }
             .artist {
                 color: @gray-3;
+            }
+        }
+        .play-btn, .pause-btn {
+            display: none;
+            position: absolute;
+            font-size: 3em;
+            color: white;
+            background: rgba(0, 0, 0, 0.46);
+            text-align: center;
+            width: 100px;
+            border-radius: 80px;
+            height: 100px;
+            margin-left: 16px;
+            margin-top: 18px;
+            i {
+                position: relative;
+                top: 21px;
+            }
+        }
+        .play-btn {
+            i {
+                left: 8px;
+            }
+        }
+        &.active {
+            background: rgb(232, 232, 232);
+            &.playing {
+                .play-btn {
+                    display: none;
+                }
+                .pause-btn {
+                    display: block;
+                }
+            }
+            &.paused {
+                .play-btn {
+                    display: block;
+                }
+                .pause-btn {
+                    display: none;
+                }
             }
         }
     }
