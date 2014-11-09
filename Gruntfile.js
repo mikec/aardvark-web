@@ -13,7 +13,7 @@ module.exports = function(grunt) {
             app_unminified: {
                 expand: true,
                 cwd: 'app',
-                src: ['**/*.js', '!**/*_test.js', '**/*.html'],
+                src: ['**/*.js', '!**/*_test.js', '**/*.html', '**/*.jpg', '**/*.png'],
                 dest: 'dist/app/unminified'
             },
             app_minified: {

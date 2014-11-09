@@ -16,7 +16,7 @@
     <div class="right-col">
 
       <br />
-      <div ng-if="ctrl.PlaylistMaker.loading" class="song-loading">Loading Songs <b>{{ctrl.PlaylistMaker.loadedComplete}}/{{ctrl.PlaylistMaker.loadedTotal}}</b></div>
+      <div ng-if="ctrl.PlaylistMaker.loading" class="song-loading">Loading Playlist <span class="percent-progress">{{ctrl.PlaylistMaker.percentLoaded}}%</span></div>
 
       <br />
       <div class="playlist">

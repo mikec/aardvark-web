@@ -24,7 +24,8 @@ app.use(function(req, res, next) {
     var splittedPath = parsedUrl.pathname.split(path.sep);
     var fileExt = getFileExtension(parsedUrl.pathname);
 
-    if (fileExt == 'js' || fileExt == 'css' || fileExt == 'html') {
+    if (fileExt == 'js' || fileExt == 'css' ||
+            fileExt == 'html' || fileExt == 'jpg' || fileExt == 'png') {
         splittedPath.splice(1, 0, getMinPrefix(config));
     }
 
