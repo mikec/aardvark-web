@@ -1,5 +1,6 @@
 /* exported aardvarkweb */
 var aardvarkweb = angular.module('aardvarkweb', [
-    'ngAnimate'
+    'ngAnimate',
+    'ngRoute'
 	/* module dependencies */
 ]);

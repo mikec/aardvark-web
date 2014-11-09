@@ -1,7 +1,7 @@
 /**
  * App controller.
  */
-aardvarkweb.AppCtrl = ['API', '$scope', function(API, $scope) {
+aardvarkweb.AppCtrl = ['$scope', function($scope) {
 
     var $this = this;
 
@@ -12,8 +12,9 @@ aardvarkweb.AppCtrl = ['API', '$scope', function(API, $scope) {
 
     this.rdioAuth = function() {
         R.authenticate(function(nowAuthenticated) {
-            $this.rdioUserName = getUsername();
-            $scope.$apply();
+            $scope.$apply(function() {
+                $this.rdioUserName = getUsername();
+            });
         });
     };
 
@@ -25,11 +26,6 @@ aardvarkweb.AppCtrl = ['API', '$scope', function(API, $scope) {
         }
         $scope.$apply();
     });
-
-    API.getArtists()
-        .then(function(resp) {
-            $this.song = resp.song;
-        });
 
     function getUsername() {
         return R.currentUser.get('firstName') + ' ' + R.currentUser.get('lastName');

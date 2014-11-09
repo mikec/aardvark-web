@@ -22,13 +22,16 @@ app.use(function(req, res, next) {
     var config = configFromReq(req);
     var parsedUrl = url.parse(req.url);
     var splittedPath = parsedUrl.pathname.split(path.sep);
+    var fileExt = getFileExtension(parsedUrl.pathname);
 
-    if (splittedPath[1]) {
+    if (fileExt == 'js' || fileExt == 'css' || fileExt == 'html') {
         splittedPath.splice(1, 0, getMinPrefix(config));
     }
 
     parsedUrl.pathname = splittedPath.join(path.sep);
     req.url = url.format(parsedUrl);
+
+    console.log('URL: ' + req.url);
 
     req.config = config;
     next();
@@ -36,11 +39,18 @@ app.use(function(req, res, next) {
 
 app.use('/', express.static(path.join(rootPath, 'app')));
 
+app.get('/:anything', function(req, res) {
+    console.log('PARAM');
+    renderView(req.config, res, 'index');
+});
+
 app.get('/', function(req, res) {
+    console.log('RENDER INDEX');
     renderView(req.config, res, 'index');
 });
 
 app.use(function(req, res) {
+    console.log('REDIRECT');
     res.redirect('/');
 });
 
@@ -60,4 +70,8 @@ function configFromReq(req) {
 
 function getMinPrefix(conf) {
     return conf.minify || globalConfig.minify ? 'minified' : 'unminified';
+}
+
+function getFileExtension(filePath) {
+    return filePath.split('.').pop();
 }

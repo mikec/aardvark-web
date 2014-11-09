@@ -9,12 +9,17 @@
         <!-- build:js /app.js -->
         <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/modules.js"></script>
         <script src="/api-service.js"></script>
         <script src="/app-controller.js"></script>
+        <script src="/playlist-controller.js"></script>
         <script src="/app.js"></script>
 		<!-- endbuild -->
 
     </head>
-    <body ng-app="aardvarkweb" ng-include="'/main.html'"></body>
+    <body ng-app="aardvarkweb" ng-controller="AppCtrl as ctrl">
+        <div ng-include="'/auth.html'"></div>
+        <div ng-view></div>
+    </body>
 </html>

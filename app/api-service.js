@@ -10,8 +10,8 @@ aardvarkweb.API = function() {
 
         function API() {}
 
-        API.prototype.getArtists = function() {
-            return railsGet('/songs/1');
+        API.prototype.getArtistsForHandle = function(twitterHandle) {
+            return railsGet('/' + twitterHandle);
         };
 
         function railsGet(url) {
