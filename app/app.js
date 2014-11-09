@@ -1,10 +1,15 @@
-aardvarkweb.config(['APIProvider', '$httpProvider', '$routeProvider', '$locationProvider',
-function(APIProvider, $httpProvider, $routeProvider, $locationProvider) {
+aardvarkweb.config(
+    ['APIProvider', 'PlaylistMakerProvider', '$httpProvider',
+        '$routeProvider', '$locationProvider',
+    function(APIProvider, PlaylistMakerProvider, $httpProvider,
+        $routeProvider, $locationProvider) {
 
     $httpProvider.defaults.headers.common['Content-Type'] =
            'application/json';
 
     APIProvider.setApiRoot('http://localhost:3000');
+
+    PlaylistMakerProvider.setSongLimit(15);
 
     $locationProvider.html5Mode(true);
 
