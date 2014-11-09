@@ -11,12 +11,8 @@ aardvarkweb.API = function() {
         function API() {}
 
         API.prototype.getTwitterUser = function(twitterHandle) {
-            return railsGet('/' + twitterHandle);
-        };
-
-        function railsGet(url) {
-            return $http.get(apiRoot + url)
-                        .then(function(resp) {
+            return railsGet('/' + twitterHandle)
+                    .then(function(resp) {
                             var usr = resp.data.twitter_user;
 
                             usr.image_url = usr.image_url
@@ -29,6 +25,24 @@ aardvarkweb.API = function() {
 
                             return usr;
                         });
+        };
+
+        API.prototype.getTwitterUsers = function() {
+            return railsGet('/').then(function(resp) {
+                            var users = resp.data.twitter_users;
+
+                            for(var i in users) {
+                                var u = users[i];
+                                u.image_url = u.image_url
+                                                .replace('_normal', '_400x400');
+                            }
+
+                            return users;
+                        });
+        };
+
+        function railsGet(url) {
+            return $http.get(apiRoot + url);
         }
 
         return new API();

@@ -1,8 +1,12 @@
-aardvarkweb.SearchCtrl = [function() {
+aardvarkweb.SearchCtrl = ['API', function(API) {
 
-    this.playbackTest = function() {
-        R.player.play({ source: 't55903104'});
-    };
+    var $this = this;
+    this.twitterUsers = [];
+
+    API.getTwitterUsers()
+        .then(function(users) {
+            $this.twitterUsers = users;
+        });
 
 }];
 

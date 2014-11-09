@@ -1,17 +1,7 @@
-<div ng-if="ctrl.authed">
-  Welcome {{ctrl.rdioUserName}}!
-
-  <div>{{ctrl.artist}}</div>
-  <div ng-if="ctrl.station">
-    yo
-    {{ctrl.station}}
-  </div>
-</div>
-
 <div>
 
   <div class="index-header">
-    <h2>Check out whose popular right now</h2>
+    <h2>Search ::::::::::::::::::::::::::::::::::::::::</h2>
 
     <div class="search-bar">
       <input type="text" />
@@ -19,65 +9,12 @@
     </div>
   </div>
 
-  <a href="#">
-  <div class="recommend">
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
+  <a ng-repeat="usr in ctrl.twitterUsers" ng-href="{{'/' + usr.handle}}" class="recommend-user">
+    <img ng-src="{{usr.image_url}}" />
+    <div class="recommend-user-name">
+      <div class="screen-name">{{usr.name}}</div>
+      <div class="handle">@{{usr.handle}}</div>
     </div>
   </a>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-    <div class="recommend-user">
-      <img src="http://pbs.twimg.com/profile_images/526853535246209024/sV8b7Pq8_400x400.jpeg" />
-      <div class="recommend-user-name">
-        <div class="screen-name">Vince Staples</div>
-        <div class="handle">@vincestaples</div>
-      </div>
-    </div>
-  </div>
 
 </div>
