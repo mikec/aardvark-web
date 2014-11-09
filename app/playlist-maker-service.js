@@ -8,6 +8,8 @@ aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
         $this = this;
         this.loading = false;
         this.percentLoaded = 0;
+        this.loadedTotal = 0;
+        this.loadedComplete = 0;
         this.songs = [];
     }
 
@@ -16,6 +18,8 @@ aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
         this.songs = [];
         this.loading = true;
         this.percentLoaded = 0;
+        this.loadedTotal = 0;
+        this.loadedComplete = 0;
         stationLoadingQueue = [];
         stationKeys = [];
 
@@ -52,6 +56,8 @@ aardvarkweb.PlaylistMaker = ['$rootScope', 'Rdio', function($rootScope, Rdio) {
     function updatePercentLoaded() {
         var tot = stationKeys.length;
         var done = tot - stationLoadingQueue.length;
+        $this.loadedTotal = tot;
+        $this.loadedComplete = done;
         $this.percentLoaded = Math.round((done / tot)*100);
     }
 
