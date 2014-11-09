@@ -1,9 +1,16 @@
 aardvarkweb.PlaylistCtrl = ['$routeParams', 'API',
 function($routeParams, API) {
 
+    var $this = this;
     this.handle = $routeParams.handle;
+    this.twitterUser = null;
+    this.loading = true;
 
-    this.artists = API.getArtistsForHandle(this.handle);
+    API.getTwitterUser(this.handle)
+        .then(function(twitterUser) {
+            $this.loading = false;
+            $this.twitterUser = twitterUser;
+        });
 
 }];
 

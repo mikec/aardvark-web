@@ -1,6 +1,18 @@
 <div>
-  PLAYLIST FOR {{ctrl.handle}}
 
-  ARTISTS: {{ctrl.artists}}
+  <div ng-if="ctrl.loading">loading data for <b>@{{ctrl.handle}}</b>...</div>
+
+  <div ng-if="!ctrl.loading">
+    <img ng-src="{{ctrl.twitterUser.image_url}}" style="width:300px;" />
+    <div><b>{{ctrl.twitterUser.name}}</b></div>
+    <div>
+      <a ng-href="{{'http://twitter.com/' + ctrl.twitterUser.handle}}">@{{ctrl.twitterUser.handle}}</a>
+    </div>
+
+    <div ng-repeat="artist in ctrl.twitterUser.songs">
+      {{artist.rdio_id}}
+    </div>
+
+  </div>
 
 </div>

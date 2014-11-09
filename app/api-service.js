@@ -10,14 +10,14 @@ aardvarkweb.API = function() {
 
         function API() {}
 
-        API.prototype.getArtistsForHandle = function(twitterHandle) {
-            return railsGet('/' + twitterHandle);
+        API.prototype.getTwitterUser = function(twitterHandle) {
+            return railsGet('/twitter_users/' + twitterHandle);
         };
 
         function railsGet(url) {
             return $http.get(apiRoot + url)
                         .then(function(resp) {
-                            return resp.data;
+                            return resp.data.twitter_user;
                         });
         }
 
