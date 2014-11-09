@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <base href="/">
+        <title>Aardvark</title>
         <link href="/app.css" rel="stylesheet" />
 
         <script src="//www.rdio.com/api/api.js?client_id=YqjUCa9XLaZr0hcxwOHH3A"></script>
@@ -22,7 +23,10 @@
 
     </head>
     <body ng-app="aardvarkweb" ng-controller="AppCtrl as ctrl">
-        <div ng-include="'/auth.html'"></div>
-        <div ng-view></div>
+        <div ng-include="'/header.html'"></div>
+        <div class="general-inner">
+            <div ng-include="'/auth.html'"></div>
+            <div ng-view></div>
+        </div>
     </body>
 </html>
